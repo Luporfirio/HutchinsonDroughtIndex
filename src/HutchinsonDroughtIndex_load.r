@@ -23,14 +23,14 @@
  if(!file.exists(file.path(absDir,'aussd.Rdata'))){ 
   setwd(absDir)
   
-  download.file('http://www.abs.gov.au/AUSSTATS/subscriber.nsf/log?openagent&SD06aAUST.zip&1259.0.30.002&Data%20Cubes&56AEC033DFC11A5CCA2571BF007E5185&0&2006&04.08.2006&Latest', 'SD06aAUST.zip', mode = 'wb')
+  download.file('http://www.abs.gov.au/ausstats/subscriber.nsf/log?openagent&SD06aAUST.zip&1259.0.30.002&Data%20Cubes&56AEC033DFC11A5CCA2571BF007E5185&0&2006&04.08.2006&Latest', 'SD06aAUST.zip', mode = 'wb')
   unzip('SD06aAUST.zip',junkpaths=T)
   
   sink('readme.txt')
   cat(paste('Australian Bureau of Statistics Statistical Divisions 2006 
   downloaded on', Sys.Date(),
   '
-  from http://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/1259.0.30.0022006?OpenDocument')
+  from http://www.abs.gov.au/ausstats/abs@.nsf/DetailsPage/1259.0.30.0022006?OpenDocument')
   )
   sink()
   
