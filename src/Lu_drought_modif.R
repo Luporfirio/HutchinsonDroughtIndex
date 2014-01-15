@@ -39,9 +39,22 @@ sixmnthtot<-apply(x, 2, function(x) c(rep(NA,5),x+lag(x,1)+lag(x,2)+lag(x,3)+lag
 # variable
 require(zoo)
 ?rollapply
+#sixmnthtot2<- apply(x, 2, function(x) rollapply(x, 6, sum)) ###check- TODO later
+
 ##rank
 # TODO select for each month ie all Januarys are ranked seperate from Febs etc
-rank <- apply(x, 2, function(x) {return((rank(x)-1)/(length(x)-1))})
+#rank <- apply(x, 2, function(x) {return((rank(x)-1)/(length(x)-1))})
+#get months
+months <- substr(rownames(x),20,21)
+tw <-c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
+
+#actually I'm not sure this is correct... how do I check?
+for(i in tw){
+rankmnth <- apply(x, 2, 
+                  function(x) ifelse(i == months,
+                                     {return((rank(x)-1)/(length(x)-1))},i))
+}
+
 index <- apply(rank, 2, function(x) 8*(x-.5)) #to be a brick
 # .375 is refering to palmer's benchmark but we could let the user vary this
 drought <- apply(x, 2, function(x) x<=quantile(x,.375)) #TO DO: replace number by argument droughtThreshold
